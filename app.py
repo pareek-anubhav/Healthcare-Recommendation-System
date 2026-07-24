@@ -46,21 +46,20 @@ def index():
 
 if __name__ == "__main__":
 
-    with app.app_context():
-        db.create_all()
+   # Create database and default admin (runs both locally and on Render)
+with app.app_context():
+    db.create_all()
 
-        # Seed one default admin account if no admin exists yet,
-        # so there's always a way to log in to the Admin dashboard.
-        if not User.query.filter_by(email="pareekanubhav22@gmail.com").first():
-            default_admin = User(
-                full_name="Admin",
-                email="pareekanubhav22@gmail.com",
-                password=bcrypt.generate_password_hash("Admin@2006").decode("utf-8"),
-                role="admin"
-            )
+    if not User.query.filter_by(email="pareekanubhav22@gmail.com").first():
+        default_admin = User(
+            full_name="Admin",
+            email="pareekanubhav22@gmail.com",
+            password=bcrypt.generate_password_hash("Admin@2006").decode("utf-8"),
+            role="admin"
+        )
 
-            db.session.add(default_admin)
-            db.session.commit()
+        db.session.add(default_admin)
+        db.session.commit()
 
+if __name__ == "__main__":
     app.run(debug=True, use_reloader=False)
-    

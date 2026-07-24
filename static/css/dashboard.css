@@ -1,0 +1,255 @@
+/* =========================================================
+   DESIGN TOKENS  (same palette as predict.css / result.css,
+   kept in sync so every page feels like one product)
+   ========================================================= */
+:root {
+    --bg: #f2f7f6;
+    --surface: #ffffff;
+    --primary: #0e7c66;
+    --primary-dark: #095b4b;
+    --accent: #e8895c;
+    --danger: #d64545;
+    --danger-dark: #b3352f;
+    --text: #16231f;
+    --muted: #64766f;
+    --border: #dce8e4;
+    --radius-lg: 20px;
+    --radius-md: 12px;
+    --shadow: 0 20px 45px -20px rgba(14, 55, 46, 0.25);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 40px;
+}
+
+h2, h3 {
+    font-family: 'Sora', sans-serif;
+}
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.navbar h2 {
+    margin: 0;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.navbar a {
+    color: var(--primary);
+    text-decoration: none;
+    margin-left: 18px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: color 0.15s ease;
+}
+
+.navbar a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* =========================================================
+   STAT CARDS
+   ========================================================= */
+.cards {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    border-radius: var(--radius-lg);
+    padding: 22px 30px;
+    min-width: 180px;
+}
+
+.card h3 {
+    margin: 0 0 6px 0;
+    color: var(--primary);
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* =========================================================
+   TABLES
+   ========================================================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+}
+
+th, td {
+    border-bottom: 1px solid var(--border);
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 14px;
+}
+
+th {
+    background: var(--primary);
+    color: #fff;
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background: var(--bg);
+}
+
+/* =========================================================
+   FORMS
+   ========================================================= */
+form.search-form {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+form.search-form input[type=text] {
+    padding: 12px 14px;
+    width: 280px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    transition: border-color 0.15s ease;
+}
+
+form.search-form input[type=text]:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+form.search-form button {
+    padding: 12px 20px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+form.search-form button:hover {
+    background: var(--primary-dark);
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+.btn {
+    display: inline-block;
+    padding: 9px 16px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.btn-danger {
+    background: var(--danger);
+}
+
+.btn-danger:hover {
+    background: var(--danger-dark);
+}
+
+/* =========================================================
+   ALERTS
+   ========================================================= */
+.alert {
+    padding: 13px 16px;
+    border-radius: var(--radius-md);
+    margin-bottom: 18px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.alert-success {
+    background: #e6f4ee;
+    color: var(--primary-dark);
+}
+
+.alert-danger {
+    background: #fdecea;
+    color: #b3261e;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+@media (max-width: 700px) {
+    body {
+        padding: 20px;
+    }
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .navbar a {
+        margin-left: 0;
+        margin-right: 14px;
+    }
+    .cards {
+        flex-direction: column;
+    }
+    form.search-form {
+        flex-direction: column;
+    }
+    form.search-form input[type=text] {
+        width: 100%;
+    }
+}

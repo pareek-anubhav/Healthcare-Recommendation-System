@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediScan — AI Healthcare Recommendation System</title>
+
+    <!-- Google Fonts: Sora for headings, Inter for body text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Select2 (makes the symptom dropdown searchable) -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+
+    <!-- Our own stylesheet -->
+    <link href="{{ url_for('static', filename='css/predict.css') }}" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Soft decorative background shapes -->
+    <div class="bg-blob bg-blob--one"></div>
+    <div class="bg-blob bg-blob--two"></div>
+
+    <main class="page">
+
+        <header class="brand">
+            <div class="brand__mark">+</div>
+            <div>
+                <p class="brand__eyebrow">MediScan AI</p>
+                <h1 class="brand__title">Tell us what you're feeling</h1>
+            </div>
+        </header>
+
+        <section class="card">
+
+            {% if error %}
+            <div class="alert">
+                <span class="alert__icon">!</span>
+                <span>{{ error }}</span>
+            </div>
+            {% endif %}
+
+            <form action="/predict" method="POST" id="predict-form">
+
+                <label class="field-label" for="symptoms">
+                    Search and select your symptoms
+                </label>
+                <p class="field-hint">Pick as many as apply — the more you add, the sharper the prediction.</p>
+
+                <select
+                    name="symptoms"
+                    id="symptoms"
+                    multiple
+                    class="symptom-select">
+
+                    {% for symptom in symptoms %}
+                    <option value="{{ symptom }}">{{ symptom.title() }}</option>
+                    {% endfor %}
+
+                </select>
+
+                <div class="selected-count" id="selected-count">
+                    0 symptoms selected
+                </div>
+
+                <button type="submit" class="btn-predict">
+                    Analyze my symptoms
+                    <span class="btn-predict__arrow">→</span>
+                </button>
+
+            </form>
+
+        </section>
+
+        <p class="disclaimer">
+            MediScan gives an AI-generated estimate, not a medical diagnosis.
+            Always confirm with a doctor before acting on it.
+        </p>
+
+    </main>
+
+    <!-- jQuery + Select2 (required for the searchable dropdown) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <!-- Our own script -->
+    <script src="{{ url_for('static', filename='js/predict.js') }}"></script>
+
+</body>
+</html>

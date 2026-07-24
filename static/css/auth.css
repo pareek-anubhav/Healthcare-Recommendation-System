@@ -1,0 +1,237 @@
+/* =========================================================
+   DESIGN TOKENS  (same palette as predict.css / result.css,
+   kept in sync so every page feels like one product)
+   ========================================================= */
+:root {
+    --bg: #f2f7f6;
+    --surface: #ffffff;
+    --primary: #0e7c66;
+    --primary-dark: #095b4b;
+    --accent: #e8895c;
+    --text: #16231f;
+    --muted: #64766f;
+    --border: #dce8e4;
+    --radius-lg: 24px;
+    --radius-md: 14px;
+    --shadow: 0 20px 45px -20px rgba(14, 55, 46, 0.25);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Soft decorative background blobs, same as predict/result pages */
+.bg-blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.35;
+    z-index: 0;
+}
+
+.bg-blob--one {
+    width: 380px;
+    height: 380px;
+    top: -110px;
+    right: -110px;
+    background: var(--primary);
+}
+
+.bg-blob--two {
+    width: 300px;
+    height: 300px;
+    bottom: -100px;
+    left: -100px;
+    background: var(--accent);
+}
+
+/* =========================================================
+   LAYOUT
+   ========================================================= */
+.auth-page {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 20px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+.brand__mark {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    border-radius: 13px;
+    background: var(--primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 700;
+    box-shadow: var(--shadow);
+}
+
+.brand__eyebrow {
+    margin: 0 0 2px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--primary);
+}
+
+.brand__title {
+    margin: 0;
+    font-family: 'Sora', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+/* Card that holds the form */
+.auth-card {
+    width: 100%;
+    max-width: 400px;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    padding: 36px;
+}
+
+.auth-card h2 {
+    margin: 0 0 24px;
+    font-family: 'Sora', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+/* Flash messages */
+.alert {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.alert-danger {
+    background: #fdecea;
+    color: #b3261e;
+}
+
+.alert-success {
+    background: #e6f4ee;
+    color: var(--primary-dark);
+}
+
+/* Form fields */
+.auth-card label {
+    display: block;
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 6px;
+    color: var(--text);
+}
+
+.auth-card input {
+    width: 100%;
+    padding: 13px 14px;
+    margin-bottom: 18px;
+    border-radius: var(--radius-md);
+    border: 2px solid var(--border);
+    background: var(--bg);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--text);
+    transition: border-color 0.2s ease;
+}
+
+.auth-card input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+/* Submit button */
+.btn-auth {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    background: var(--primary);
+    color: #fff;
+    font-family: 'Sora', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px 20px;
+    border-radius: var(--radius-md);
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-auth:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+/* Links under the form */
+.auth-links {
+    margin-top: 22px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--muted);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.auth-links a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+.auth-links__row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.auth-links__divider {
+    color: var(--border);
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 26px;
+    }
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+
+<div class="navbar">
+    <h2>Admin Dashboard</h2>
+    <div>
+        <a href="{{ url_for('admin.add_doctor') }}">Add Doctor</a>
+        <a href="{{ url_for('admin.manage_users') }}">Manage Users</a>
+        <a href="{{ url_for('admin.analytics') }}">View Analytics</a>
+        <a href="{{ url_for('admin.logout') }}">Logout</a>
+    </div>
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
+{% endwith %}
+
+<div class="cards">
+
+    <div class="card">
+        <h3>{{ total_users }}</h3>
+        <p>Total Users</p>
+    </div>
+
+    <div class="card">
+        <h3>{{ total_doctors }}</h3>
+        <p>Total Doctors</p>
+    </div>
+
+    <div class="card">
+        <h3>{{ total_predictions }}</h3>
+        <p>Total Predictions Made</p>
+    </div>
+
+</div>
+
+</body>
+</html>

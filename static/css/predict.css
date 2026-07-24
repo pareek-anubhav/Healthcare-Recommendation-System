@@ -1,0 +1,265 @@
+/* =========================================================
+   DESIGN TOKENS
+   Change a value here and it updates the whole page.
+   ========================================================= */
+:root {
+    --bg: #f2f7f6;
+    --surface: #ffffff;
+    --primary: #0e7c66;
+    --primary-dark: #095b4b;
+    --accent: #e8895c;
+    --text: #16231f;
+    --muted: #64766f;
+    --border: #dce8e4;
+    --radius-lg: 24px;
+    --radius-md: 14px;
+    --shadow: 0 20px 45px -20px rgba(14, 55, 46, 0.25);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* =========================================================
+   SOFT BACKGROUND BLOBS
+   Purely decorative circles that sit behind the content.
+   ========================================================= */
+.bg-blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.35;
+    z-index: 0;
+}
+
+.bg-blob--one {
+    width: 420px;
+    height: 420px;
+    top: -120px;
+    right: -120px;
+    background: var(--primary);
+}
+
+.bg-blob--two {
+    width: 320px;
+    height: 320px;
+    bottom: -100px;
+    left: -100px;
+    background: var(--accent);
+}
+
+/* =========================================================
+   LAYOUT
+   ========================================================= */
+.page {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 64px 24px 48px;
+}
+
+/* Brand header: little plus-sign mark + eyebrow + title */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.brand__mark {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 14px;
+    background: var(--primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
+    box-shadow: var(--shadow);
+}
+
+.brand__eyebrow {
+    margin: 0 0 4px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--primary);
+}
+
+.brand__title {
+    margin: 0;
+    font-family: 'Sora', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+/* Main card that holds the form */
+.card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 36px;
+    border: 1px solid var(--border);
+}
+
+/* Error alert */
+.alert {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #fdecea;
+    color: #b3261e;
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.alert__icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #b3261e;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+}
+
+/* Form labels */
+.field-label {
+    display: block;
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.field-hint {
+    margin: 0 0 16px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* =========================================================
+   SELECT2 OVERRIDES
+   Select2 injects its own markup, so we re-skin it here.
+   ========================================================= */
+.select2-container {
+    width: 100% !important;
+}
+
+.select2-selection--multiple {
+    min-height: 56px !important;
+    padding: 6px !important;
+    border-radius: var(--radius-md) !important;
+    border: 2px solid var(--border) !important;
+    background: var(--bg) !important;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+    border-color: var(--primary) !important;
+}
+
+.select2-selection__choice {
+    background: var(--primary) !important;
+    border: none !important;
+    color: #fff !important;
+    border-radius: 8px !important;
+    padding: 4px 8px !important;
+}
+
+.select2-selection__choice__remove {
+    color: #fff !important;
+    margin-right: 6px !important;
+}
+
+.select2-dropdown {
+    border-radius: var(--radius-md) !important;
+    border: 2px solid var(--border) !important;
+    overflow: hidden;
+}
+
+/* Counter under the dropdown */
+.selected-count {
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+/* =========================================================
+   SUBMIT BUTTON
+   ========================================================= */
+.btn-predict {
+    margin-top: 28px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    background: var(--primary);
+    color: #fff;
+    font-family: 'Sora', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px 20px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-predict:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.btn-predict__arrow {
+    transition: transform 0.2s ease;
+}
+
+.btn-predict:hover .btn-predict__arrow {
+    transform: translateX(4px);
+}
+
+/* Footer disclaimer */
+.disclaimer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 24px;
+    line-height: 1.5;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+@media (max-width: 560px) {
+    .page {
+        padding: 40px 16px 32px;
+    }
+    .card {
+        padding: 24px;
+    }
+    .brand__title {
+        font-size: 24px;
+    }
+}

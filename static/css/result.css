@@ -1,0 +1,371 @@
+/* =========================================================
+   DESIGN TOKENS  (same palette as predict.css, kept in sync)
+   ========================================================= */
+:root {
+    --bg: #f2f7f6;
+    --surface: #ffffff;
+    --primary: #0e7c66;
+    --primary-dark: #095b4b;
+    --accent: #e8895c;
+    --text: #16231f;
+    --muted: #64766f;
+    --border: #dce8e4;
+    --radius-lg: 24px;
+    --radius-md: 14px;
+    --shadow: 0 20px 45px -20px rgba(14, 55, 46, 0.25);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.bg-blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.35;
+    z-index: 0;
+}
+
+.bg-blob--one {
+    width: 420px;
+    height: 420px;
+    top: -120px;
+    right: -120px;
+    background: var(--primary);
+}
+
+.bg-blob--two {
+    width: 320px;
+    height: 320px;
+    bottom: -100px;
+    left: -100px;
+    background: var(--accent);
+}
+
+.page {
+    position: relative;
+    z-index: 1;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 56px 24px 48px;
+}
+
+/* Brand header (matches predict page) */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.brand__mark {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 14px;
+    background: var(--primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
+    box-shadow: var(--shadow);
+}
+
+.brand__eyebrow {
+    margin: 0 0 4px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--primary);
+}
+
+.brand__title {
+    margin: 0;
+    font-family: 'Sora', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+/* =========================================================
+   RANK SWITCHER — the 3 clickable tabs (🥇 🥈 🥉)
+   ========================================================= */
+.rank-switcher {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.rank-tab {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 14px 12px;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rank-tab:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.rank-tab--active {
+    border-color: var(--primary);
+    background: #eaf6f2;
+}
+
+.rank-tab__medal {
+    font-size: 22px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.rank-tab__info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.rank-tab__disease {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rank-tab__confidence {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+}
+
+/* =========================================================
+   DETAIL PANELS
+   Hidden by default; JS adds/removes "detail-panel--active".
+   ========================================================= */
+.detail-panel {
+    display: none;
+}
+
+.detail-panel--active {
+    display: block;
+}
+
+.detail-card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    padding: 36px;
+}
+
+.detail-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.detail-header__label {
+    margin: 0 0 4px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--primary);
+}
+
+.detail-header__title {
+    margin: 0;
+    font-family: 'Sora', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+}
+
+.confidence-badge {
+    flex-shrink: 0;
+    background: var(--bg);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 8px 16px;
+    text-align: center;
+}
+
+.confidence-badge__value {
+    display: block;
+    font-family: 'Sora', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.confidence-badge__label {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Confidence progress bar */
+.confidence-bar {
+    height: 8px;
+    background: var(--border);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 28px;
+}
+
+.confidence-bar__fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 999px;
+    transition: width 0.4s ease;
+}
+
+/* Description + section blocks */
+.detail-block {
+    margin-bottom: 20px;
+}
+
+.detail-block__title {
+    font-family: 'Sora', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 10px;
+}
+
+.detail-block__text {
+    margin: 0;
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 14.5px;
+}
+
+/* 2-column grid for medication / diet / workouts / precautions */
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.pill-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pill-list li {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13.5px;
+    line-height: 1.4;
+}
+
+/* Back link + footer */
+.back-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    text-align: center;
+    margin-top: 32px;
+}
+
+.btn-back {
+    display: inline-block;
+    background: var(--primary);
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 14px 28px;
+    border-radius: var(--radius-md);
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-back:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.btn-history {
+    display: inline-block;
+    background: transparent;
+    color: var(--primary);
+    text-decoration: none;
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 14px 28px;
+    border-radius: var(--radius-md);
+    border: 2px solid var(--border);
+    transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-history:hover {
+    border-color: var(--primary);
+    transform: translateY(-1px);
+}
+
+.disclaimer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 24px;
+    line-height: 1.5;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+@media (max-width: 700px) {
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+    .page {
+        padding: 36px 16px 32px;
+    }
+    .rank-switcher {
+        grid-template-columns: 1fr;
+    }
+    .detail-card {
+        padding: 22px;
+    }
+    .detail-header {
+        flex-direction: column;
+    }
+    .brand__title {
+        font-size: 24px;
+    }
+}

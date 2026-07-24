@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Patients</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+
+<div class="navbar">
+    <h2>Search Patients</h2>
+    <div>
+        <a href="{{ url_for('doctor.dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('doctor.logout') }}">Logout</a>
+    </div>
+</div>
+
+<form class="search-form" method="GET">
+    <input type="text" name="q" placeholder="Search by name or email" value="{{ query }}">
+    <button type="submit">Search</button>
+</form>
+
+{% if query and not patients %}
+    <p>No patients found for "{{ query }}".</p>
+{% endif %}
+
+{% if patients %}
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Action</th>
+    </tr>
+
+    {% for patient in patients %}
+    <tr>
+        <td>{{ patient.full_name }}</td>
+        <td>{{ patient.email }}</td>
+        <td>{{ patient.phone or "-" }}</td>
+        <td><a class="btn" href="{{ url_for('doctor.patient_history', patient_id=patient.id) }}">View History</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+</body>
+</html>

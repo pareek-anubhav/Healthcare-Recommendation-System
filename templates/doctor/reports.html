@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Reports</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+
+<div class="navbar">
+    <h2>Recent Reports</h2>
+    <div>
+        <a href="{{ url_for('doctor.dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('doctor.logout') }}">Logout</a>
+    </div>
+</div>
+
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Patient</th>
+        <th>Disease</th>
+        <th>Confidence</th>
+        <th>Symptoms</th>
+    </tr>
+
+    {% for item in history %}
+    <tr>
+        <td>{{ item.prediction_date }}</td>
+        <td>{{ item.user.full_name }}</td>
+        <td>{{ item.predicted_disease }}</td>
+        <td>{{ item.confidence }}%</td>
+        <td>{{ item.symptoms }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

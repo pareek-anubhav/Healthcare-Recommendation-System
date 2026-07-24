@@ -1,0 +1,8 @@
+Metric,Value
+Train Samples,76870
+Test Samples,19218
+Features,231
+Diseases,100
+Best Model,Logistic Regression
+Test Accuracy,0.8981
+Cross Validation Accuracy,0.8917

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+
+<div class="navbar">
+    <h2>History — {{ patient.full_name }}</h2>
+    <div>
+        <a href="{{ url_for('doctor.search_patients') }}">⬅ Back to Search</a>
+        <a href="{{ url_for('doctor.logout') }}">Logout</a>
+    </div>
+</div>
+
+<p><strong>Email:</strong> {{ patient.email }} &nbsp; | &nbsp; <strong>Age:</strong> {{ patient.age or "-" }} &nbsp; | &nbsp; <strong>Gender:</strong> {{ patient.gender or "-" }}</p>
+
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Disease</th>
+        <th>Confidence</th>
+        <th>Symptoms</th>
+    </tr>
+
+    {% for item in history %}
+    <tr>
+        <td>{{ item.prediction_date }}</td>
+        <td>{{ item.predicted_disease }}</td>
+        <td>{{ item.confidence }}%</td>
+        <td>{{ item.symptoms }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

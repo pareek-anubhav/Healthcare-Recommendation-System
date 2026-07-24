@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analytics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+
+<div class="navbar">
+    <h2>Analytics</h2>
+    <div>
+        <a href="{{ url_for('admin.dashboard') }}">⬅ Dashboard</a>
+        <a href="{{ url_for('admin.logout') }}">Logout</a>
+    </div>
+</div>
+
+<div class="cards">
+
+    <div class="card">
+        <h3>{{ total_users }}</h3>
+        <p>Total Users</p>
+    </div>
+
+    <div class="card">
+        <h3>{{ total_doctors }}</h3>
+        <p>Total Doctors</p>
+    </div>
+
+    <div class="card">
+        <h3>{{ total_predictions }}</h3>
+        <p>Total Predictions Made</p>
+    </div>
+
+</div>
+
+<h3>Top Predicted Diseases</h3>
+<table>
+    <tr>
+        <th>Disease</th>
+        <th>Times Predicted</th>
+    </tr>
+
+    {% for disease, count in top_diseases %}
+    <tr>
+        <td>{{ disease }}</td>
+        <td>{{ count }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

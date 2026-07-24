@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Results — MediScan AI</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='css/result.css') }}" rel="stylesheet">
+</head>
+<body>
+
+    <div class="bg-blob bg-blob--one"></div>
+    <div class="bg-blob bg-blob--two"></div>
+
+    <main class="page">
+
+        <header class="brand">
+            <div class="brand__mark">+</div>
+            <div>
+                <p class="brand__eyebrow">MediScan AI</p>
+                <h1 class="brand__title">Here's what we found</h1>
+            </div>
+        </header>
+
+        <!-- =========================================================
+             RANK SWITCHER
+             One tab per prediction. Clicking a tab shows that
+             disease's full detail panel below (see result.js).
+             ========================================================= -->
+        <div class="rank-switcher">
+
+            {% for item in result.top_predictions %}
+            <button
+                type="button"
+                class="rank-tab {% if loop.index == 1 %}rank-tab--active{% endif %}"
+                data-target="panel-{{ loop.index0 }}">
+
+                <span class="rank-tab__medal">
+                    {% if loop.index == 1 %}🥇{% elif loop.index == 2 %}🥈{% else %}🥉{% endif %}
+                </span>
+
+                <span class="rank-tab__info">
+                    <span class="rank-tab__disease">{{ item.disease.title() }}</span>
+                    <span class="rank-tab__confidence">{{ item.confidence }}% match</span>
+                </span>
+            </button>
+            {% endfor %}
+
+        </div>
+
+        <!-- =========================================================
+             DETAIL PANELS
+             All three are rendered up front; JS just shows/hides them.
+             ========================================================= -->
+        {% for item in result.top_predictions %}
+        <section
+            class="detail-panel {% if loop.index == 1 %}detail-panel--active{% endif %}"
+            id="panel-{{ loop.index0 }}">
+
+            <div class="detail-card">
+
+                <div class="detail-header">
+                    <div>
+                        <p class="detail-header__label">
+                            {% if loop.index == 1 %}Most likely condition{% else %}Possible condition #{{ loop.index }}{% endif %}
+                        </p>
+                        <h2 class="detail-header__title">{{ item.disease.title() }}</h2>
+                    </div>
+
+                    <div class="confidence-badge">
+                        <span class="confidence-badge__value">{{ item.confidence }}%</span>
+                        <span class="confidence-badge__label">confidence</span>
+                    </div>
+                </div>
+
+                <div class="confidence-bar">
+                    <div class="confidence-bar__fill" style="width: {{ item.confidence }}%;"></div>
+                </div>
+
+                <div class="detail-block">
+                    <h3 class="detail-block__title">📖 Description</h3>
+                    <p class="detail-block__text">{{ item.description }}</p>
+                </div>
+
+                <div class="detail-grid">
+
+                    <div class="detail-block">
+                        <h3 class="detail-block__title">💊 Medication</h3>
+                        <ul class="pill-list">
+                            {% for med in item.medication %}
+                            <li>{{ med }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="detail-block">
+                        <h3 class="detail-block__title">🥗 Diet</h3>
+                        <ul class="pill-list">
+                            {% for food in item.diet %}
+                            <li>{{ food }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="detail-block">
+                        <h3 class="detail-block__title">🏃 Workouts</h3>
+                        <ul class="pill-list">
+                            {% for workout in item.workouts %}
+                            <li>{{ workout }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="detail-block">
+                        <h3 class="detail-block__title">⚠️ Precautions</h3>
+                        <ul class="pill-list">
+                            {% if item.precaution_1 %}<li>{{ item.precaution_1 }}</li>{% endif %}
+                            {% if item.precaution_2 %}<li>{{ item.precaution_2 }}</li>{% endif %}
+                            {% if item.precaution_3 %}<li>{{ item.precaution_3 }}</li>{% endif %}
+                            {% if item.precaution_4 %}<li>{{ item.precaution_4 }}</li>{% endif %}
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+        {% endfor %}
+
+        <div class="back-row">
+            <a href="{{ url_for('prediction.home') }}" class="btn-back">← Check different symptoms</a>
+            <a href="{{ url_for('auth.history') }}" class="btn-history">View Prediction History</a>
+        </div>
+
+        <p class="disclaimer">
+            MediScan gives an AI-generated estimate, not a medical diagnosis.
+            Always confirm with a doctor before acting on it.
+        </p>
+
+    </main>
+    
+
+    <script src="{{ url_for('static', filename='js/result.js') }}"></script>
+
+</body>
+</html>

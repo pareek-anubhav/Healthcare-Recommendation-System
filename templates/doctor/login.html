@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Login — MediScan AI</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='css/auth.css') }}" rel="stylesheet">
+</head>
+<body>
+
+    <div class="bg-blob bg-blob--one"></div>
+    <div class="bg-blob bg-blob--two"></div>
+
+    <main class="auth-page">
+
+        <header class="brand">
+            <div class="brand__mark">+</div>
+            <div>
+                <p class="brand__eyebrow">MediScan AI · Doctor Portal</p>
+                <h1 class="brand__title">Doctor Login</h1>
+            </div>
+        </header>
+
+        <div class="auth-card">
+            <h2>Login</h2>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endwith %}
+
+            <form method="POST">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="••••••••" required>
+
+                <button type="submit" class="btn-auth">Login</button>
+            </form>
+
+            <div class="auth-links">
+                <a href="{{ url_for('auth.login') }}">Back to User Login</a>
+            </div>
+        </div>
+
+    </main>
+
+</body>
+</html>

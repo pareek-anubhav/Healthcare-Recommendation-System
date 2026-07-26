@@ -44,22 +44,35 @@ from flask import redirect, url_for
 def index():
     return redirect(url_for("auth.login"))
 
-if __name__ == "__main__":
-
-   # Create database and default admin (runs both locally and on Render)
-with app.app_context():
-    db.create_all()
-
-    if not User.query.filter_by(email="pareekanubhav22@gmail.com").first():
-        default_admin = User(
-            full_name="Admin",
-            email="pareekanubhav22@gmail.com",
-            password=bcrypt.generate_password_hash("Admin@2006").decode("utf-8"),
-            role="admin"
-        )
-
-        db.session.add(default_admin)
-        db.session.commit()
 
 if __name__ == "__main__":
+
+    with app.app_context():
+
+        db.create_all()
+
+        # Create default admin only once
+        admin = User.query.filter_by(
+            email="pareekanubhav22@gmail.com"
+        ).first()
+
+        if not admin:
+
+            admin = User(
+                full_name="Admin",
+                email="pareekanubhav22@gmail.com",
+                password=bcrypt.generate_password_hash(
+                    "Admin@2006"
+                ).decode("utf-8"),
+                role="admin"
+            )
+
+            db.session.add(admin)
+            db.session.commit()
+
+            print("✅ Default admin created")
+
+        else:
+            print("✅ Admin already exists")
+
     app.run(debug=True, use_reloader=False)

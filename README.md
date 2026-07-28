@@ -113,16 +113,16 @@ GitHub: https://github.com/pareek-anubhav
 ## 📸 Screenshots
 
 ### Login
-![Login](docs/login.png)
+![Login](docs/Login.png)
 
 ### Prediction
-![Prediction](docs/prediction.png)
+![Prediction](docs/Prediction.png)
 
 ### Result
 ![Result](docs/result.png)
 
 ### Doctor Dashboard
-![Doctor](docs/doctor_dashboard.png)
+![Doctor](docs/Doctor_dashboard.png)
 
 ### Admin Dashboard
-![Admin](docs/admin_dashboard.png)
+![Admin](docs/Admin_dashboard.png)
